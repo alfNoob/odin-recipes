@@ -1,0 +1,33 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container {
+    background-color: #ddd;
+    width: 100%;
+    position: absolute;
+}
+
+.one {
+    margin: 12px 24px;
+    border: 1px solid blue;
+    padding: 32px;
+    background-color: rgb(235, 160, 160);
+}
+
+.two {
+    border: 1px solid red;
+    background-color: aqua;
+    margin: 0 12px;
+}
+
+.three {
+    margin: 48px 12px 0;
+    padding: 32px;
+    border: 1px solid red;
+    background-color: rgb(237, 213, 124);
+    width: 45%;
+    margin-left: auto;
+}
