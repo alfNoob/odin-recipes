@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Demo margin collapse & solusi</title>
+<style>
+  /* reset seperti yang kamu pakai */
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; line-height: 1.4; padding: 20px; background: #f6f6f6; }
+
+  h1 { margin-bottom: 12px; font-size: 18px; }
+  .wrap { margin-bottom: 36px; border-radius: 8px; overflow: visible; }
+
+  /* elemen konten yang sama di semua container */
+  .container {
+    background-color: #ddd;
+    margin-bottom: 8px; /* jarak antar demo blocks */
+  }
+  .one, .two, .three {
+    border-radius: 6px;
+    margin: 0px 24px;
+    margin-bottom: 12px;
+    /* <-- margin-top:12px penting untuk demo */
+    margin-top: 12px;         
+    padding: 32px;
+    background-color: rgb(235, 160, 160);
+    border: 1px solid rgba(0,0,200,0.6);
+  }
+  .two { background: rgb(160,235,200); border-color: rgba(0,120,0,0.5); }
+  .three { background: rgb(160,180,235); border-color: rgba(0,0,120,0.4); }
+
+  /* VARIANTS */
+  .variant-title { padding: 8px 12px; font-weight: 600; background: #fff; border-top-left-radius:8px; border-top-right-radius:8px; border:1px solid #e3e3e3; border-bottom:none; }
+  .demo { border:1px solid #e3e3e3; border-bottom-left-radius:8px; border-bottom-right-radius:8px; padding:12px; background:#fff; }
+
+  /* 1. default (menunjukkan margin collapse) */
+  .default .container { /* nothing special */ }
+
+  /* 2. overflow (direkomendasikan) */
+  .overflow .container { overflow: auto; }
+
+  /* 3. padding-top pada parent */
+  .padding .container { padding-top: 12px; }
+  .padding .one { margin: 0 24px 12px; } /* kita hapus margin-top anak pada contoh ini agar padding bekerja sempurna */
+
+  /* 4. border-top transparan */
+  .border-trick .container { border-top: 1px solid transparent; }
+
+  /* 5. flex variant (perubahan layout) */
+  .flex .container { display: flex; flex-direction: column; }
+
+  /* 6. absolute (contoh BAHAYA) */
+  .absolute-wrap { position: relative; height: 220px; margin-top: 6px; }
+  .absolute .container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    /* background tetap, tapi container di luar flow */
+  }
+  /* untuk menunjukkan elemen setelah container yang tidak terdorong */
+  .after {
+    margin-top: 12px;
+    padding: 12px;
+    background: #fff;
+    border: 1px solid #ddd;
+  }
+
+  /* tambahan: contoh memenuhi tinggi viewport */
+  .fullheight .container { min-height: 100vh; }
+  .note { font-size: 13px; color:#555; margin-top:8px; }
+</style>
+</head>
+<body>
+  <h1>Demo: margin-top collapse & solusi — bandingkan tiap varian</h1>
+
+  <!-- DEFAULT -->
+  <div class="wrap default">
+    <div class="variant-title">Default — <small>menunjukkan margin collapse</small></div>
+    <div class="demo">
+      <div class="container">
+        <div class="one">DIV one (margin-top:12px)</div>
+        <div class="two">DIV two</div>
+        <div class="three">DIV three</div>
+      </div>
+      <div class="note">Perhatikan: background <code>#ddd</code> akan terlihat ada celah di atas karena margin collapse.</div>
+    </div>
+  </div>
+
+  <!-- OVERFLOW -->
+  <div class="wrap overflow">
+    <div class="variant-title">Overflow — <small>rekomendasi (aman & scalable)</small></div>
+    <div class="demo">
+      <div class="container">
+        <div class="one">DIV one (margin-top:12px)</div>
+        <div class="two">DIV two</div>
+        <div class="three">DIV three</div>
+      </div>
+      <div class="note">Menambahkan <code>overflow: auto</code> mencegah margin collapse tanpa mengubah flow elemen.</div>
+    </div>
+  </div>
+
+  <!-- PADDING -->
+  <div class="wrap padding">
+    <div class="variant-title">Padding-top pada parent — <small>manual tapi stabil</small></div>
+    <div class="demo">
+      <div class="container">
+        <div class="one">DIV one (margin-top removed, padding-top parent)</div>
+        <div class="two">DIV two</div>
+        <div class="three">DIV three</div>
+      </div>
+      <div class="note">Kamu harus menyesuaikan margin/padding anak jika menggunakan pendekatan ini.</div>
+    </div>
+  </div>
+
+  <!-- BORDER TRICK -->
+  <div class="wrap border-trick">
+    <div class="variant-title">Border-top transparan — <small>trik cepat (menambah 1px)</small></div>
+    <div class="demo">
+      <div class="container">
+        <div class="one">DIV one (margin-top:12px)</div>
+        <div class="two">DIV two</div>
+        <div class="three">DIV three</div>
+      </div>
+      <div class="note">Menambahkan border-top:1px solid transparent mencegah margin collapse tapi menambah 1px tinggi.</div>
+    </div>
+  </div>
+
+  <!-- FLEX -->
+  <div class="wrap flex">
+    <div class="variant-title">Flex container — <small>menghilangkan collapse tapi ubah layout</small></div>
+    <div class="demo">
+      <div class="container">
+        <div class="one">DIV one (margin-top:12px)</div>
+        <div class="two">DIV two</div>
+        <div class="three">DIV three</div>
+      </div>
+      <div class="note">Flex mengubah konteks layout (width/height/alignments) — gunakan hanya jika memang butuh flex.</div>
+    </div>
+  </div>
+
+  <!-- ABSOLUTE (DANGER) -->
+  <div class="wrap absolute">
+    <div class="variant-title">Position: absolute — <small>contoh BAHAYA untuk layout utama</small></div>
+    <div class="demo absolute-wrap">
+      <div class="container">
+        <div class="one">DIV one (margin-top:12px)</div>
+        <div class="two">DIV two</div>
+        <div class="three">DIV three</div>
+      </div>
+      <!-- elemen setelah container -->
+      <div class="after">Elemen setelah container (seharusnya terdorong ke bawah, tetapi tidak jika container absolute)</div>
+    </div>
+    <div class="note">Container absolute dikeluarkan dari flow → elemen berikutnya akan menindih/naik ke posisi atas.</div>
+  </div>
+
+  <!-- FULLHEIGHT (mengisi viewport) -->
+  <div class="wrap fullheight">
+    <div class="variant-title">Mengisi tinggi viewport — <small>gunakan <code>min-height:100vh</code></small></div>
+    <div class="demo">
+      <div class="container">
+        <div class="one">DIV one</div>
+        <div class="two">DIV two</div>
+        <div class="three">DIV three</div>
+      </div>
+      <div class="note">Gunakan <code>min-height:100vh</code> agar background selalu memenuhi layar dari atas sampai bawah.</div>
+    </div>
+  </div>
+</body>
+</html>

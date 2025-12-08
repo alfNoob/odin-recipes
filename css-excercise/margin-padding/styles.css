@@ -7,7 +7,7 @@
 .container {
     background-color: #ddd;
     width: 100%;
-    position: absolute;
+    overflow: auto;
 }
 
 .one {
