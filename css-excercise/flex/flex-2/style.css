@@ -1,0 +1,36 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container {
+    width: 95%;
+    background: rgb(248, 235, 211);
+    display: flex;
+    justify-content: space-between;
+    margin: auto;
+    align-items: center;
+}
+
+.container .left, .right {
+    display: flex;
+    width: 200px;
+    justify-content: space-around;
+}
+
+.container .left, .right, .center {
+    margin: 10px 0;
+}
+
+.container a, h3 {
+    background-color: #fff;
+    text-decoration: none;
+    padding: 5px;
+}
+
+.container .center h3 {
+    padding: 10px;
+    color: rgb(215, 103, 38);
+    font-size: 24px;
+}

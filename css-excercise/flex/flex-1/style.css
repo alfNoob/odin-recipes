@@ -1,0 +1,31 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --m1: 10px;
+}
+
+.container {
+    background: #60a4d5;
+    border: 5px solid blue;
+    height: calc(100vh - 20px);
+    margin: var(--m1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.box {
+    background: #f18b8b;
+    border: 8px solid #900505;
+    width: 100px;
+    height: 100px;
+    text-align: center;
+}
+
+.word {
+    font-weight: bold;
+}
