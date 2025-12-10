@@ -1,0 +1,59 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #ddd;
+}
+
+.container {
+    display: flex;
+    background: #fff;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, .1);
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 8px;
+}
+
+.container .logo {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-style: italic;
+    color: purple;
+}
+
+.left, .right {
+    display: flex;
+    gap: 16px;
+}
+
+.left ul {
+    list-style: none;
+    display: flex;
+    gap: 8px;
+}
+
+.left ul a {
+    text-decoration: none;
+    color: purple;
+}
+
+.right {
+    display: flex;
+    align-items: center;
+}
+
+.right .notif {
+    background: purple;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.right .circle {
+    background: purple;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
