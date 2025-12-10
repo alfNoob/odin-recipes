@@ -17,6 +17,7 @@
     display: flex;
     justify-content: space-around;
     font-size: 12px;
+    list-style: none;
 }
 
 .container .left, .right, .center {
@@ -35,8 +36,9 @@
     font-size: 16px;
 }
 
-.container p {
+.container li a {
     margin: 0.4rem;
+    padding: 5px;
 }
 
 @media screen and (min-width: 768px) {
