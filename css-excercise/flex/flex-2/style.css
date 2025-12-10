@@ -15,22 +15,36 @@
 
 .container .left, .right {
     display: flex;
-    width: 200px;
     justify-content: space-around;
+    font-size: 12px;
 }
 
 .container .left, .right, .center {
-    margin: 10px 0;
+    margin: 10px;
 }
 
 .container a, h3 {
     background-color: #fff;
     text-decoration: none;
-    padding: 5px;
+    padding: 5px 0;
 }
 
 .container .center h3 {
     padding: 10px;
     color: rgb(215, 103, 38);
-    font-size: 24px;
+    font-size: 16px;
+}
+
+.container p {
+    margin: 0.4rem;
+}
+
+@media screen and (min-width: 768px) {
+    .container .left, .right {
+        gap: 2rem;
+    }
+
+    .container .center h3 {
+        font-size: 24px;
+    }
 }
