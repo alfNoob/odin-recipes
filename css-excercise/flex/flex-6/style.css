@@ -1,0 +1,74 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: space-between; */
+}
+
+header, footer {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+footer {
+    background: #eee;
+}
+
+ul {
+    list-style: none;
+    display: flex;
+    gap: 1rem;
+}
+
+li a {
+    text-decoration: none;
+    color: #555;
+}
+
+li a:after {
+    border-bottom: 1px solid black;
+    content: "";
+    width: 0;
+    margin-top: 2px;
+    /* taruh display block di selector tanpa hover, agar layout tidak bergerak saat kursor diarahkan */
+    display: block;
+    transition: width .3s ease-in-out;
+}
+
+li a:hover:after {
+    width: 100%;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    flex: 1;
+}
+
+input {
+    width: 400px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+    padding: 5px;
+}
+
+button {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+}
+
+/* set img */
+img {
+    max-width: 400px;
+}
